@@ -19,6 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(actores.router)
 app.include_router(expedientes.router)
 
 # evento de inicio de FastAPI: Crea las tablas de forma asíncrona en PostgreSQL
