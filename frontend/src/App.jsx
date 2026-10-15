@@ -4,6 +4,8 @@ import { sucesoService } from './services/api';
 import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
 import L from 'leaflet';
 
+
+
 // Corrección obligatoria para que los íconos de Leaflet no se vean rotos en React
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
