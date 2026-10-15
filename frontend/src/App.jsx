@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { sucesoService } from './services/api';
 import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
 import L from 'leaflet';
@@ -7,11 +7,12 @@ import L from 'leaflet';
 // Corrección obligatoria para que los íconos de Leaflet no se vean rotos en React
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
 let DefaultIcon = L.icon({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
-  iconSize:,
-  iconAnchor: [12, 41]
+  iconSize: [25, 41],     // Dimensiones estándar del pin de Leaflet
+  iconAnchor: [12, 41]    // Punto de anclaje en el mapa geográfico
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -50,7 +51,7 @@ function App() {
       <div className="w-1/3 h-full bg-zinc-900 border-r border-zinc-800 flex flex-col z-10 shadow-2xl overflow-y-auto">
         <div className="p-6 border-b border-zinc-800 bg-zinc-950">
           <div className="flex items-center space-x-2 text-red-500 mb-1">
-            <Shield className="w-5 h-5 animate-pulse" />
+            <Shield className="w-5 h-5" />
             <h1 className="text-xl font-bold tracking-wider">CARTOGRAFÍA DE LA MEMORIA</h1>
           </div>
           <p className="text-xs text-zinc-500 uppercase tracking-widest">Conflicto Armado en Colombia</p>
@@ -70,7 +71,7 @@ function App() {
               <p className="text-sm text-zinc-400">Seleccione un marcador en el mapa geográfico para desplegar el expediente histórico documentado.</p>
             </div>
           ) : (
-            <div className="space-y-6 animate-fadeIn">
+            <div className="space-y-6">
               {/* Título y metadatos */}
               <div>
                 <h2 className="text-xl font-bold text-zinc-100 border-b border-zinc-800 pb-3">{sucesoSeleccionado.titulo}</h2>
@@ -116,7 +117,7 @@ function App() {
               )}
 
               {/* Matriz de Fuentes y Noticias */}
-              {sucesoSeleccionado.fuentes && sucesoSeleccionado.fuentes.length > 0 && (
+              {sucesoSeleccionado.fuentes && sucesoseleccionado.fuentes.length > 0 && (
                 <div className="space-y-2">
                   <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold">📚 INVESTIGACIONES Y FUENTES</h3>
                   <div className="space-y-2">
