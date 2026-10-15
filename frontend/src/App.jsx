@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { sucesoService } from './services/api';
 import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
 import L from 'leaflet';
+import { sucesoService } from './services/api';
 
 
 
