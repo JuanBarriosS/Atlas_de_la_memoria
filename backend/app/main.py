@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.models import Suceso, Actor, suceso_actor 
-from app.routers import expedientes
+from app.routers import expedientes, actores
 
 app = FastAPI(
     title="Bitacora de la verdad - API",
