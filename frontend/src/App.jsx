@@ -4,18 +4,17 @@ import { sucesoService } from './services/api';
 import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
 import L from 'leaflet';
 
+// IMPORTANTE: Sin esto, el mapa de Leaflet se rompe
+import 'leaflet/dist/leaflet.css';
 
-
-
-// Corrección obligatoria para que los íconos de Leaflet no se vean rotos en React
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 let DefaultIcon = L.icon({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
-  iconSize: [25, 41],     // Dimensiones estándar del pin de Leaflet
-  iconAnchor: [12, 41]    // Punto de anclaje en el mapa geográfico
+  iconSize: [25, 41],
+  iconAnchor: [12, 41]
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -24,7 +23,6 @@ function App() {
   const [sucesoSeleccionado, setSucesoSeleccionado] = useState(null);
   const [error, setError] = useState(null);
 
-  // Cargar los puntos ligeros del mapa al iniciar la aplicación
   useEffect(() => {
     async function cargarPuntos() {
       try {
@@ -37,7 +35,6 @@ function App() {
     cargarPuntos();
   }, []);
 
-  // Función para manejar el clic en un pin y cargar su expediente pesado
   async function manejarSeleccionPin(id) {
     try {
       const detalle = await sucesoService.obtenerDetalle(id);
@@ -50,7 +47,7 @@ function App() {
   return (
     <div className="flex h-screen w-screen bg-zinc-950 font-mono text-zinc-100 overflow-hidden">
       
-      {/* PANEL LATERAL IZQUIERDO: Control e información histórica */}
+      {/* PANEL LATERAL IZQUIERDO */}
       <div className="w-1/3 h-full bg-zinc-900 border-r border-zinc-800 flex flex-col z-10 shadow-2xl overflow-y-auto">
         <div className="p-6 border-b border-zinc-800 bg-zinc-950">
           <div className="flex items-center space-x-2 text-red-500 mb-1">
@@ -75,7 +72,6 @@ function App() {
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Título y metadatos */}
               <div>
                 <h2 className="text-xl font-bold text-zinc-100 border-b border-zinc-800 pb-3">{sucesoSeleccionado.titulo}</h2>
                 <div className="flex items-center space-x-4 text-xs text-zinc-400 mt-3 bg-zinc-950/40 p-2 border border-zinc-800 rounded">
@@ -89,7 +85,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Narrativa Histórica */}
               <div className="space-y-2">
                 <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold flex items-center space-x-1">
                   <span>📄 RELATO DE LOS HECHOS</span>
@@ -99,7 +94,6 @@ function App() {
                 </p>
               </div>
 
-              {/* Video Documental Incrustado */}
               {sucesoSeleccionado.video_url && (
                 <div className="space-y-2">
                   <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold flex items-center space-x-1">
@@ -119,8 +113,8 @@ function App() {
                 </div>
               )}
 
-              {/* Matriz de Fuentes y Noticias */}
-              {sucesoSeleccionado.fuentes && sucesoseleccionado.fuentes.length > 0 && (
+              {/* BUG CORREGIDO AQUÍ: sucesoseleccionado -> sucesoSeleccionado */}
+              {sucesoSeleccionado.fuentes && sucesoSeleccionado.fuentes.length > 0 && (
                 <div className="space-y-2">
                   <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold">📚 INVESTIGACIONES Y FUENTES</h3>
                   <div className="space-y-2">
@@ -143,21 +137,20 @@ function App() {
         </div>
       </div>
 
-      {/* MAPA INTERACTIVO (Ocupa el resto de la pantalla) */}
+      {/* MAPA INTERACTIVO */}
       <div className="flex-1 h-full bg-zinc-950 relative">
         <MapContainer
-          center={[4.5709, -74.2973]} // Centro geográfico de Colombia
+          center={[4.5709, -74.2973]}
           zoom={6}
           className="w-full h-full z-0"
           zoomControl={false}
         >
-          {/* Estilo de mapa oscuro minimalista de CartoDB */}
+          {/* BUG CORREGIDO AQUÍ: URL del TileLayer oscuro de CartoDB */}
           <TileLayer
-            url="https://{s}://{z}/{x}/{y}{r}.png"
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
             attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>'
           />
           
-          {/* Pintar los marcadores que entrega la API ligera */}
           {pines.map((pin) => (
             <Marker
               key={pin.id}

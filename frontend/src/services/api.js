@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://127.0.0';
+// Apuntamos al backend local con el prefijo correcto
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 
 export const sucesoService = {
   // 1. Obtiene los pines ligeros para cargarlos en el mapa de Colombia rápidamente
@@ -13,7 +14,7 @@ export const sucesoService = {
     }
   },
 
-  // 2. Obtiene el expediente pesado (descripción, videos, noticias) de un punto específico
+  // 2. Obtiene el expediente pesado de un punto específico
   obtenerDetalle: async (id) => {
     try {
       const response = await fetch(`${API_BASE_URL}/sucesos/${id}`);
