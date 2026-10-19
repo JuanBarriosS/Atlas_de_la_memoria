@@ -23,10 +23,10 @@ async def obtener_puntos_mapa(db: AsyncSession = Depends(get_db)):
 @router.get("/{suceso_id}", response_model=SucesoDetalleResponse)
 async def obtener_detalle_suceso(suceso_id: int, db: AsyncSession = Depends(get_db)):
     resultado = await db.execute(
-        select(Suceso).where(Suceso.id == sucesos_id)
+        select(Suceso).where(Suceso.id == suceso_id)
     )
     suceso = resultado.scalar_one_or_none()
-    
+
     if not suceso:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -36,15 +36,13 @@ async def obtener_detalle_suceso(suceso_id: int, db: AsyncSession = Depends(get_
 
 @router.post("/", response_model=SucesoDetalleResponse, status_code=status.HTTP_201_CREATED)
 async def crear_suceso(suceso_in: SucesoCreate, db: AsyncSession = Depends(get_db)):
-    # Convertimos el esquema de Pydantic a un diccionario nativo de Python para SQLAlchemy
     datos_suceso = suceso_in.model_dump()
-    
+
     nuevo_suceso = Suceso(**datos_suceso)
     db.add(nuevo_suceso)
-    
-    # Forzamos la escritura y confirmación asíncrona directa en las tablas de PostgreSQL
+
     await db.flush()
     await db.commit()
     await db.refresh(nuevo_suceso)
-    
+
     return nuevo_suceso
