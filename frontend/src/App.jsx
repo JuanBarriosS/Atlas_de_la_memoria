@@ -113,7 +113,6 @@ function App() {
                 </div>
               )}
 
-              {/* BUG CORREGIDO AQUÍ: sucesoseleccionado -> sucesoSeleccionado */}
               {sucesoSeleccionado.fuentes && sucesoSeleccionado.fuentes.length > 0 && (
                 <div className="space-y-2">
                   <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold">📚 INVESTIGACIONES Y FUENTES</h3>
@@ -142,13 +141,18 @@ function App() {
         <MapContainer
           center={[4.5709, -74.2973]}
           zoom={6}
+          minZoom={5}
+          maxBounds={[
+            [-4.5, -82.0], // Suroeste (Lat, Lng)
+            [13.5, -66.0]  // Noreste (Lat, Lng)
+          ]}
+          maxBoundsViscosity={1.0}
           className="w-full h-full z-0"
           zoomControl={false}
         >
-          {/* BUG CORREGIDO AQUÍ: URL del TileLayer oscuro de CartoDB */}
           <TileLayer
-            url={`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${import.meta.env.VITE_CARTO_KEY}`}
-            attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>'
+            url="https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=cb1_4pbe_1_9908e41efa8cf38fb047b15c"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
           
           {pines.map((pin) => (
