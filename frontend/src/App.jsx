@@ -4,7 +4,6 @@ import { sucesoService } from './services/api';
 import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
 import L from 'leaflet';
 
-// IMPORTANTE: Sin esto, el mapa de Leaflet se rompe
 import 'leaflet/dist/leaflet.css';
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -103,7 +102,11 @@ function App() {
                   <div className="relative w-full aspect-video rounded border border-zinc-800 overflow-hidden bg-black">
                     <iframe
                       className="absolute top-0 left-0 w-full h-full"
-                      src={sucesoSeleccionado.video_url}
+                      src={
+                        sucesoSeleccionado.video_url?.includes('watch?v=') 
+                          ? sucesoSeleccionado.video_url.replace('watch?v=', 'embed/').split('&')[0]
+                          : sucesoSeleccionado.video_url
+                      }
                       title="Registro documental"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -143,8 +146,8 @@ function App() {
           zoom={6}
           minZoom={5}
           maxBounds={[
-            [-4.5, -82.0], // Suroeste (Lat, Lng)
-            [13.5, -66.0]  // Noreste (Lat, Lng)
+            [-4.5, -82.0],
+            [13.5, -66.0]
           ]}
           maxBoundsViscosity={1.0}
           className="w-full h-full z-0"
