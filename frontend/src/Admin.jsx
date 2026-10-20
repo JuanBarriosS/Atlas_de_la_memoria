@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { sucesoService } from './services/api';
 
 function Admin() {
-  // 1. Estado para guardar los datos del formulario
   const [formData, setFormData] = useState({
     titulo: '',
     fecha: '',
@@ -12,13 +11,11 @@ function Admin() {
     municipio: '',
     descripcion: '',
     video_url: '',
-    fuentes: '' // Aquí recibiremos un texto, luego lo convertimos a JSON
+    fuentes: ''
   });
 
-  // 2. Estado para mensajes de éxito o error
   const [mensaje, setMensaje] = useState(null);
 
-  // 3. Función que se ejecuta cada vez que el usuario escribe en un campo
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -26,29 +23,24 @@ function Admin() {
     });
   };
 
-  // 4. Función que se ejecuta al darle "Guardar"
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMensaje(null);
 
     try {
-      // Preparamos el objeto final. Convertimos las fuentes de texto a JSON válido.
       const fuentesParsed = formData.fuentes ? JSON.parse(formData.fuentes) : [];
       
       const payload = {
         ...formData,
-        // Convertimos latitud y longitud a números (FastAPI espera números, no strings)
         latitud: parseFloat(formData.latitud),
         longitud: parseFloat(formData.longitud),
         fuentes: fuentesParsed
       };
 
-      // Llamamos al servicio (que modificaremos en el Paso 3)
       await sucesoService.crearSuceso(payload);
       
       setMensaje({ tipo: 'exito', texto: '¡Suceso creado exitosamente!' });
       
-      // Limpiamos el formulario
       setFormData({
         titulo: '', fecha: '', latitud: '', longitud: '',
         departamento: '', municipio: '', descripcion: '', video_url: '', fuentes: ''
@@ -71,19 +63,16 @@ function Admin() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Título */}
           <div>
             <label className="block text-sm mb-1 text-zinc-400">Título</label>
             <input type="text" name="titulo" required value={formData.titulo} onChange={handleChange} className="w-full p-2 bg-zinc-950 border border-zinc-700 rounded text-zinc-100" />
           </div>
 
-          {/* Fecha */}
           <div>
             <label className="block text-sm mb-1 text-zinc-400">Fecha (YYYY-MM-DD)</label>
             <input type="date" name="fecha" required value={formData.fecha} onChange={handleChange} className="w-full p-2 bg-zinc-950 border border-zinc-700 rounded text-zinc-100" />
           </div>
 
-          {/* Latitud y Longitud */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm mb-1 text-zinc-400">Latitud</label>
@@ -95,7 +84,6 @@ function Admin() {
             </div>
           </div>
 
-          {/* Departamento y Municipio */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm mb-1 text-zinc-400">Departamento</label>
@@ -107,19 +95,16 @@ function Admin() {
             </div>
           </div>
 
-          {/* Descripción */}
           <div>
             <label className="block text-sm mb-1 text-zinc-400">Descripción / Relato</label>
             <textarea name="descripcion" required rows="5" value={formData.descripcion} onChange={handleChange} className="w-full p-2 bg-zinc-950 border border-zinc-700 rounded text-zinc-100" />
           </div>
 
-          {/* Video URL */}
           <div>
-            <label className="block text-sm mb-1 text-zinc-400">URL del Video (YouTube embed)</label>
+            <label className="block text-sm mb-1 text-zinc-400">URL del Video (YouTube)</label>
             <input type="url" name="video_url" value={formData.video_url} onChange={handleChange} className="w-full p-2 bg-zinc-950 border border-zinc-700 rounded text-zinc-100" />
           </div>
 
-          {/* Fuentes (JSON) */}
           <div>
             <label className="block text-sm mb-1 text-zinc-400">Fuentes (Formato JSON)</label>
             <textarea name="fuentes" rows="3" placeholder='[{"nombre": "Fuente 1", "url": "https://..."}]' value={formData.fuentes} onChange={handleChange} className="w-full p-2 bg-zinc-950 border border-zinc-700 rounded text-zinc-100" />
