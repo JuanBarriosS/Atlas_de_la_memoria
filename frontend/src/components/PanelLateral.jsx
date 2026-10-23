@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Clock, BookOpen, Film, AlertTriangle } from 'lucide-react';
+import { Shield, Clock, BookOpen, Film, AlertTriangle, Users } from 'lucide-react';
 
 function PanelLateral({ sucesoSeleccionado, error }) {
   return (
@@ -40,6 +40,26 @@ function PanelLateral({ sucesoSeleccionado, error }) {
               </div>
             </div>
 
+            {/* SECCIÓN DE ACTORES INVOLUCRADOS */}
+            {sucesoSeleccionado.actores && sucesoSeleccionado.actores.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold flex items-center space-x-1">
+                  <Users className="w-3.5 h-3.5" />
+                  <span>ACTORES INVOLUCRADOS</span>
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {sucesoSeleccionado.actores.map((actor) => (
+                    <span
+                      key={actor.id}
+                      className="px-2 py-1 text-xs bg-zinc-950 border border-zinc-800 rounded text-zinc-300"
+                    >
+                      {actor.nombre} <span className="text-zinc-500">({actor.tipo})</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="space-y-2">
               <h3 className="text-xs uppercase tracking-wider text-zinc-500 font-bold flex items-center space-x-1">
                 <span>📄 RELATO DE LOS HECHOS</span>
@@ -59,7 +79,7 @@ function PanelLateral({ sucesoSeleccionado, error }) {
                   <iframe
                     className="absolute top-0 left-0 w-full h-full"
                     src={
-                      sucesoSeleccionado.video_url?.includes('watch?v=') 
+                      sucesoSeleccionado.video_url?.includes('watch?v=')
                         ? sucesoSeleccionado.video_url.replace('watch?v=', 'embed/').split('&')[0]
                         : sucesoSeleccionado.video_url
                     }
