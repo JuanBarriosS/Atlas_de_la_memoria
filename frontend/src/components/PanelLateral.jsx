@@ -2,6 +2,15 @@ import React from 'react';
 import { Shield, Clock, BookOpen, Film, AlertTriangle, Users } from 'lucide-react';
 
 function PanelLateral({ sucesoSeleccionado, error }) {
+
+  // Mapeo de tipos de representación a etiquetas y colores
+  const tipoLabels = {
+    pin: { texto: 'Hecho individual', color: 'bg-blue-900/50 text-blue-300 border-blue-800' },
+    proceso: { texto: 'Proceso histórico', color: 'bg-purple-900/50 text-purple-300 border-purple-800' },
+    ruta: { texto: 'Ruta / Múltiples puntos', color: 'bg-green-900/50 text-green-300 border-green-800' },
+    capa: { texto: 'Capa territorial', color: 'bg-orange-900/50 text-orange-300 border-orange-800' },
+  };
+
   return (
     <div className="w-1/3 h-full bg-zinc-900 border-r border-zinc-800 flex flex-col z-10 shadow-2xl overflow-y-auto">
       <div className="p-6 border-b border-zinc-800 bg-zinc-950">
@@ -28,7 +37,14 @@ function PanelLateral({ sucesoSeleccionado, error }) {
         ) : (
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-zinc-100 border-b border-zinc-800 pb-3">{sucesoSeleccionado.titulo}</h2>
+              <div className="flex items-center space-x-2 mb-2">
+                <h2 className="text-xl font-bold text-zinc-100 border-b border-zinc-800 pb-3 flex-1">{sucesoSeleccionado.titulo}</h2>
+              </div>
+              {sucesoSeleccionado.tipo_representacion && (
+                <span className={`inline-block px-2 py-0.5 text-xs rounded border ${tipoLabels[sucesoSeleccionado.tipo_representacion]?.color || 'bg-zinc-800 text-zinc-300'}`}>
+                  {tipoLabels[sucesoSeleccionado.tipo_representacion]?.texto || sucesoSeleccionado.tipo_representacion}
+                </span>
+              )}
               <div className="flex items-center space-x-4 text-xs text-zinc-400 mt-3 bg-zinc-950/40 p-2 border border-zinc-800 rounded">
                 <div className="flex items-center space-x-1">
                   <Clock className="w-3.5 h-3.5 text-zinc-500" />
