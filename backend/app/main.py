@@ -11,9 +11,15 @@ app = FastAPI(
 )
 
 # CORS
+origins = [
+    "https://atlas-de-la-memoria.vercel.app",  # Tu frontend en Vercel
+    "http://localhost:5173",                   # Para desarrollo local
+    "http://127.0.0.1:5173",                   # Por si usas 127.0.0.1
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "https://onrender.com","https://atlas-de-la-memoria.vercel.app"], # origenes permitidos (front)
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,11 +32,9 @@ app.include_router(expedientes.router)
 @app.on_event("startup")
 async def startup_event():
     async with engine.begin() as conn:
-        # Lee todos los modelos que heredan de Base y crea las tablas si no existen
         await conn.run_sync(Base.metadata.create_all)
     print("¡Base de datos y tablas sincronizadas correctamente!")
 
-# Endpoint de prueba 
 @app.get("/")
 async def root():
     return {
