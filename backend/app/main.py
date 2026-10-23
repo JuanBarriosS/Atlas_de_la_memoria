@@ -13,7 +13,7 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*", "https://onrender.com"], # origenes permitidos (front)
+    allow_origins=["*", "https://onrender.com","https://atlas-de-la-memoria.vercel.app"], # origenes permitidos (front)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
