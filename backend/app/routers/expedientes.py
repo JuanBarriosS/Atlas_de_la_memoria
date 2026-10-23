@@ -2,10 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from typing import List
-
 from app.database import get_db
 from app.models.suceso import Suceso
 from app.schemas.suceso import SucesoMapaResponse, SucesoDetalleResponse, SucesoCreate
+from sqlalchemy.orm import selectinload
+
 
 router = APIRouter(
     prefix="/api/v1/sucesos",
@@ -23,7 +24,9 @@ async def obtener_puntos_mapa(db: AsyncSession = Depends(get_db)):
 @router.get("/{suceso_id}", response_model=SucesoDetalleResponse)
 async def obtener_detalle_suceso(suceso_id: int, db: AsyncSession = Depends(get_db)):
     resultado = await db.execute(
-        select(Suceso).where(Suceso.id == suceso_id)
+        select(Suceso)
+        .options(selectinload(Suceso.actores))  # <-- Carga los actores
+        .where(Suceso.id == suceso_id)
     )
     suceso = resultado.scalar_one_or_none()
 
