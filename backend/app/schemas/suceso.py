@@ -34,11 +34,18 @@ class SucesoCreate(SucesoBase):
     video_url: Optional[str] = None
     fuentes: List[Dict[str, str]] = []
 
-class SucesoDetalleResponse(SucesoBase):
+class SucesoDetalleResponse(BaseModel):
     id: int
+    titulo: str
+    fecha: date
+    latitud: float
+    longitud: float
+    departamento: str
+    municipio: str
     descripcion: str
     video_url: Optional[str] = None
-    fuentes: List[Dict[str, str]]
-    actores: List[ActorResponse] = []
+    fuentes: list
+    actores: List[ActorResponse] = []  # <-- NUEVO
 
-    model_config = ConfigDict(from_attributes=True)
+    class Config:
+        from_attributes = True
