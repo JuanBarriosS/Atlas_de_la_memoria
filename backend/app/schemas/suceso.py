@@ -26,6 +26,7 @@ class SucesoMapaResponse(BaseModel):
     titulo: str
     latitud: Decimal
     longitud: Decimal
+    tipo_representacion: str
 
     model_config = ConfigDict(from_attributes=True)
 
