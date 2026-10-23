@@ -16,10 +16,9 @@ router = APIRouter(
 @router.get("/mapa", response_model=List[SucesoMapaResponse])
 async def obtener_puntos_mapa(db: AsyncSession = Depends(get_db)):
     resultado = await db.execute(
-        select(Suceso.id, Suceso.titulo, Suceso.latitud, Suceso.longitud)
+        select(Suceso.id, Suceso.titulo, Suceso.latitud, Suceso.longitud, Suceso.tipo_representacion)
     )
-    sucesos = resultado.all()
-    return sucesos
+    return resultado.all()
 
 @router.get("/{suceso_id}", response_model=SucesoDetalleResponse)
 async def obtener_detalle_suceso(suceso_id: int, db: AsyncSession = Depends(get_db)):
