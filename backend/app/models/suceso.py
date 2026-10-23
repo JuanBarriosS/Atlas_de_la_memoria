@@ -17,6 +17,8 @@ class Suceso(Base):
     descripcion = Column(Text, nullable=False)
     video_url = Column(String(500), nullable=True)     
     fuentes = Column(JSONB, nullable=False, default=[]) 
-
-    # Usamos el string "Actor" para evitar importación circular
+    tipo_representacion = Column(String(50), default="pin")
+    precision_geografica = Column(String(50), default="aproximada")
+    fecha_fin = Column(Date, nullable=True)
+    estado_revision = Column(String(50), default="publicado")
     actores = relationship("Actor", secondary=suceso_actor, back_populates="sucesos", lazy="selectin")
