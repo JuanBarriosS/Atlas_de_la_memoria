@@ -4,6 +4,14 @@ from decimal import Decimal
 from pydantic import BaseModel, Field, ConfigDict
 from app.schemas.actor import ActorResponse
 
+class ActorResponse(BaseModel):
+    id: int
+    nombre: str
+    tipo: str
+
+    class Config:
+        from_attributes = True
+
 class SucesoBase(BaseModel):
     titulo: str
     fecha: date
