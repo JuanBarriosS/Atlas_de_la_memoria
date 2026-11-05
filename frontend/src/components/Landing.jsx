@@ -4,7 +4,7 @@ import { Search, Map, Landmark, Users, FileText, ArrowRight } from 'lucide-react
 function Landing() {
   // 🖼️ AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
   // Puedes usar una URL de internet o una ruta local (ej: "/mi-foto.jpg")
-  const heroImage = "https://images.unsplash.com/photo-1544985361-b4a60f224146?q=80&w=2070&auto=format&fit=crop";
+  const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 font-sans selection:bg-amber-900 selection:text-white">
@@ -17,7 +17,7 @@ function Landing() {
           <img 
             src="/logo.png" 
             alt="Atlas de la Memoria" 
-            className="h-16 md:h-20 w-auto object-contain" 
+            className="h-12 md:h-14 w-auto object-contain"
           />
         </a>
         
