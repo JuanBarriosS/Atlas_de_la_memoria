@@ -4,7 +4,7 @@ import { Search, Map, Landmark, Users, FileText, ArrowRight } from 'lucide-react
 function Landing() {
   // AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
   // Solo reemplaza el enlace de abajo por la URL de tu imagen o por una ruta local como "/mi-imagen.jpg"
-  const heroImage = "https://images.unsplash.com/photo-1544985361-b4a60f224146?q=80&w=2070&auto=format&fit=crop";
+  const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 font-sans selection:bg-amber-900 selection:text-white">
