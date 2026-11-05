@@ -1,15 +1,24 @@
 import React from 'react';
-import { Search, Map, Landmark, Users, FileText, ArrowRight, Compass } from 'lucide-react';
+import { Search, Map, Landmark, Users, FileText, ArrowRight } from 'lucide-react';
 
 function Landing() {
+  // AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
+  // Solo reemplaza el enlace de abajo por la URL de tu imagen o por una ruta local como "/mi-imagen.jpg"
+  const heroImage = "https://images.unsplash.com/photo-1544985361-b4a60f224146?q=80&w=2070&auto=format&fit=crop";
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 font-sans selection:bg-amber-900 selection:text-white">
       
       {/* --- NAVBAR --- */}
       <nav className="absolute top-0 w-full z-50 flex items-center justify-between px-8 py-6 text-sm">
         <div className="flex items-center space-x-3">
-          {/* Logo simulado */}
-          <Compass className="w-8 h-8 text-amber-500" />
+          {/* LOGO EN PNG (Asegúrate de que esté en frontend/public/logo.png) */}
+          <img 
+            src="/logo.png" 
+            alt="Logo Atlas de la Memoria" 
+            className="w-10 h-10 object-contain" 
+          />
+          
           <div className="leading-tight">
             <h1 className="text-white font-bold tracking-widest text-lg">ATLAS</h1>
             <p className="text-amber-500 tracking-widest text-xs">DE LA MEMORIA</p>
@@ -33,24 +42,24 @@ function Landing() {
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative h-[80vh] flex items-center px-12 md:px-24">
+      <header className="relative h-[85vh] flex items-center px-12 md:px-24">
         {/* Imagen de fondo con overlay oscuro */}
         <div 
           className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544985361-b4a60f224146?q=80&w=2070&auto=format&fit=crop')" }}
+          style={{ backgroundImage: `url('${heroImage}')` }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-0"></div>
 
-        <div className="relative z-10 max-w-2xl mt-20">
+        <div className="relative z-10 max-w-3xl mt-20">
           <h1 className="text-5xl md:text-6xl font-serif text-white leading-tight mb-6">
             La historia de un país,<br/> contada desde sus territorios.
           </h1>
-          <p className="text-lg text-zinc-300 mb-10 leading-relaxed">
+          <p className="text-lg text-zinc-300 mb-10 leading-relaxed max-w-2xl">
             Explora, consulta y conoce los hechos, actores y territorios que han marcado la historia de Colombia. Un atlas interactivo de memoria histórica, construido a partir de fuentes documentales y registros verificados.
           </p>
           
           {/* Barra de búsqueda del Hero */}
-          <div className="flex items-center bg-[#1a1a1a] border border-zinc-700 p-1 rounded-sm max-w-lg">
+          <div className="flex items-center bg-[#1a1a1a] border border-zinc-700 p-1 rounded-sm max-w-xl shadow-2xl">
             <Search className="w-5 h-5 text-zinc-500 ml-3" />
             <input 
               type="text" 
