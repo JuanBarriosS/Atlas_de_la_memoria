@@ -9,28 +9,30 @@ function Landing() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 font-sans selection:bg-amber-900 selection:text-white">
       
-      {/* --- NAVBAR --- */}
-      <nav className="absolute top-0 w-full z-50 flex items-center justify-between px-8 py-6 text-sm">
+      {/* --- NAVBAR FIJA --- */}
+      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-4 text-sm bg-[#0a0a0a]/90 backdrop-blur-md border-b border-zinc-800/50">
         
-        {/* LOGO GRANDE (Sin letras) */}
+        {/* LOGO */}
         <a href="/" className="flex items-center">
           <img 
             src="/logo.png" 
             alt="Atlas de la Memoria" 
-            className="h-12 md:h-14 w-auto object-contain"
+            className="h-12 md:h-14 w-auto object-contain" 
           />
         </a>
         
+        {/* ENLACES */}
         <div className="hidden md:flex space-x-8 text-zinc-300">
-          <a href="#" className="text-white border-b-2 border-amber-500 pb-1">Inicio</a>
+          <a href="#" className="text-white border-b-2 border-amber-500 pb-1 font-medium">Inicio</a>
           <a href="/mapa" className="hover:text-white transition-colors">Atlas</a>
           <a href="#" className="hover:text-white transition-colors">Cronología</a>
           <a href="#" className="hover:text-white transition-colors">Documentos</a>
           <a href="#" className="hover:text-white transition-colors">Sobre el proyecto</a>
         </div>
 
+        {/* BOTÓN Y BUSCADOR */}
         <div className="flex items-center space-x-6">
-          <Search className="w-5 h-5 text-zinc-400 cursor-pointer hover:text-white" />
+          <Search className="w-5 h-5 text-zinc-400 cursor-pointer hover:text-white transition-colors" />
           <a href="/mapa" className="bg-amber-600 hover:bg-amber-500 text-black font-bold py-2 px-6 rounded-sm transition-colors text-xs tracking-wider">
             Explorar el mapa
           </a>
@@ -38,7 +40,9 @@ function Landing() {
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative h-[85vh] flex items-center px-12 md:px-24">
+      {/* Se agrega 'pt-32' para compensar la barra fija y que el contenido no quede tapado */}
+      <header className="relative h-screen flex items-center px-12 md:px-24 pt-32">
+        
         {/* Imagen de fondo con overlay oscuro */}
         <div 
           className="absolute inset-0 z-0 opacity-40 bg-cover bg-center"
@@ -46,7 +50,7 @@ function Landing() {
         ></div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-0"></div>
 
-        <div className="relative z-10 max-w-3xl mt-20">
+        <div className="relative z-10 max-w-3xl">
           <h1 className="text-5xl md:text-6xl font-serif text-white leading-tight mb-6">
             La historia de un país,<br/> contada desde sus territorios.
           </h1>
