@@ -5,13 +5,12 @@ function Landing() {
   const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
 
   return (
-    // Fondo general color papel (crema)
+    // Fondo color papel
     <div className="min-h-screen bg-[#F4F1EA] text-[#1A1A1A] font-serif selection:bg-[#D4C4A8] selection:text-[#1A1A1A]">
       
       {/* --- NAVBAR TIPO CABECERA DE PERIÓDICO --- */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-4 bg-[#F4F1EA]/95 backdrop-blur-sm border-b-2 border-[#1A1A1A]">
         
-        {/* LOGO */}
         <a href="/" className="flex items-center">
           <img 
             src="/logo.png" 
@@ -20,7 +19,6 @@ function Landing() {
           />
         </a>
         
-        {/* ENLACES CON ESTILO DE TITULARES */}
         <div className="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-bold text-[#1A1A1A]">
           <a href="#" className="border-b-2 border-amber-600 pb-1">Inicio</a>
           <a href="/mapa" className="hover:text-amber-700 transition-colors">Atlas</a>
@@ -29,7 +27,6 @@ function Landing() {
           <a href="#" className="hover:text-amber-700 transition-colors">Sobre el proyecto</a>
         </div>
 
-        {/* BOTÓN Y BUSCADOR */}
         <div className="flex items-center space-x-6">
           <Search className="w-5 h-5 text-[#1A1A1A] cursor-pointer hover:text-amber-700" />
           <a href="/mapa" className="bg-[#1A1A1A] hover:bg-amber-700 text-[#F4F1EA] font-bold py-2 px-6 rounded-none transition-colors text-xs uppercase tracking-widest">
@@ -39,37 +36,40 @@ function Landing() {
       </nav>
 
       {/* --- HERO SECTION TIPO PORTADA --- */}
-      <header className="relative h-screen flex items-center px-12 md:px-24 pt-32 border-b-2 border-[#1A1A1A]">
+      <header className="relative h-screen flex flex-col justify-center px-12 md:px-24 pt-32 border-b-2 border-[#1A1A1A]">
         
-        {/* Imagen de fondo con overlay sepia para efecto vintage */}
+        {/* Imagen de fondo: Ahora con opacidad alta y mix-blend-multiply para que se vea bien sobre el papel */}
         <div 
-          className="absolute inset-0 z-0 opacity-40 bg-cover bg-center grayscale"
+          className="absolute inset-0 z-0 opacity-60 bg-cover bg-center grayscale mix-blend-multiply"
           style={{ backgroundImage: `url('${heroImage}')` }}
         ></div>
+        {/* Degradado suave para que el texto no se pierda */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1EA] via-[#F4F1EA]/80 to-transparent z-0"></div>
 
-        <div className="relative z-10 max-w-4xl mt-12">
+        <div className="relative z-10 max-w-3xl">
           
           {/* Cabecera del periódico */}
-          <div className="flex items-center space-x-4 mb-6 border-b border-[#1A1A1A] pb-2">
+          <div className="flex items-center space-x-4 mb-4 border-b border-[#1A1A1A] pb-2 w-max">
             <span className="text-xs uppercase tracking-widest font-bold">Edición Especial</span>
             <span className="text-xs text-gray-500 italic">Memoria Histórica de Colombia</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold text-[#1A1A1A] leading-[1.05] mb-8 tracking-tighter">
+          {/* Título más pequeño (de text-8xl a text-6xl / text-7xl) */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1] mb-6 tracking-tighter">
             La historia de un país, contada desde sus territorios.
           </h1>
           
-          <p className="text-lg md:text-xl text-[#333] mb-10 leading-relaxed max-w-2xl font-light">
+          {/* Texto descriptivo un poco más pequeño y ancho */}
+          <p className="text-base md:text-lg text-[#333] mb-8 leading-relaxed max-w-xl font-light">
             Explora, consulta y conoce los hechos, actores y territorios que han marcado la historia de Colombia. Un atlas interactivo de memoria histórica, construido a partir de fuentes documentales y registros verificados.
           </p>
           
-          {/* Barra de búsqueda estilo archivo */}
-          <div className="flex items-center bg-white border-2 border-[#1A1A1A] p-1 max-w-2xl shadow-[4px_4px_0px_rgba(26,26,26,1)]">
+          {/* Barra de búsqueda devuelta a su lugar */}
+          <div className="flex items-center bg-white/90 border-2 border-[#1A1A1A] p-1 max-w-xl shadow-[4px_4px_0px_rgba(26,26,26,1)]">
             <Search className="w-5 h-5 text-[#1A1A1A] ml-3" />
             <input 
               type="text" 
-              placeholder="Buscar municipio, fecha, actor o acontecimiento..." 
+              placeholder="Buscar municipio, fecha, actor..." 
               className="flex-1 bg-transparent border-none text-sm px-4 py-3 text-[#1A1A1A] focus:outline-none placeholder-gray-500 font-sans"
             />
             <a href="/mapa" className="bg-[#1A1A1A] hover:bg-amber-700 text-[#F4F1EA] font-bold py-3 px-6 text-sm transition-colors whitespace-nowrap uppercase tracking-widest">
