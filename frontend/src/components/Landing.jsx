@@ -5,13 +5,13 @@ function Landing() {
   const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
 
   return (
-    // Fondo color papel
     <div className="min-h-screen bg-[#F4F1EA] text-[#1A1A1A] font-serif selection:bg-[#D4C4A8] selection:text-[#1A1A1A]">
       
       {/* --- NAVBAR TIPO CABECERA DE PERIÓDICO --- */}
       <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-4 bg-[#F4F1EA]/95 backdrop-blur-sm border-b-2 border-[#1A1A1A]">
         
-        <a href="/" className="flex items-center">
+        {/* LOGO: Lleva al mapa (o al inicio si prefieres, pero lo dejé en /mapa para cumplir con tu petición) */}
+        <a href="/mapa" className="flex items-center">
           <img 
             src="/logo.png" 
             alt="Atlas de la Memoria" 
@@ -19,8 +19,9 @@ function Landing() {
           />
         </a>
         
+        {/* ENLACES: El de "Atlas" va al mapa */}
         <div className="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-bold text-[#1A1A1A]">
-          <a href="#" className="border-b-2 border-amber-600 pb-1">Inicio</a>
+          <a href="/" className="border-b-2 border-amber-600 pb-1">Inicio</a>
           <a href="/mapa" className="hover:text-amber-700 transition-colors">Atlas</a>
           <a href="#" className="hover:text-amber-700 transition-colors">Cronología</a>
           <a href="#" className="hover:text-amber-700 transition-colors">Documentos</a>
@@ -29,6 +30,7 @@ function Landing() {
 
         <div className="flex items-center space-x-6">
           <Search className="w-5 h-5 text-[#1A1A1A] cursor-pointer hover:text-amber-700" />
+          {/* BOTÓN EXPLORAR DE LA NAVBAR: Va al mapa */}
           <a href="/mapa" className="bg-[#1A1A1A] hover:bg-amber-700 text-[#F4F1EA] font-bold py-2 px-6 rounded-none transition-colors text-xs uppercase tracking-widest">
             Explorar el mapa
           </a>
@@ -38,33 +40,28 @@ function Landing() {
       {/* --- HERO SECTION TIPO PORTADA --- */}
       <header className="relative h-screen flex flex-col justify-center px-12 md:px-24 pt-32 border-b-2 border-[#1A1A1A]">
         
-        {/* Imagen de fondo: Ahora con opacidad alta y mix-blend-multiply para que se vea bien sobre el papel */}
         <div 
           className="absolute inset-0 z-0 opacity-60 bg-cover bg-center grayscale mix-blend-multiply"
           style={{ backgroundImage: `url('${heroImage}')` }}
         ></div>
-        {/* Degradado suave para que el texto no se pierda */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1EA] via-[#F4F1EA]/80 to-transparent z-0"></div>
 
         <div className="relative z-10 max-w-3xl">
           
-          {/* Cabecera del periódico */}
           <div className="flex items-center space-x-4 mb-4 border-b border-[#1A1A1A] pb-2 w-max">
             <span className="text-xs uppercase tracking-widest font-bold">Edición Especial</span>
             <span className="text-xs text-gray-500 italic">Memoria Histórica de Colombia</span>
           </div>
 
-          {/* Título más pequeño (de text-8xl a text-6xl / text-7xl) */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1A1A] leading-[1.1] mb-6 tracking-tighter">
             La historia de un país, contada desde sus territorios.
           </h1>
           
-          {/* Texto descriptivo un poco más pequeño y ancho */}
           <p className="text-base md:text-lg text-[#333] mb-8 leading-relaxed max-w-xl font-light">
             Explora, consulta y conoce los hechos, actores y territorios que han marcado la historia de Colombia. Un atlas interactivo de memoria histórica, construido a partir de fuentes documentales y registros verificados.
           </p>
           
-          {/* Barra de búsqueda devuelta a su lugar */}
+          {/* BARRA DE BÚSQUEDA: El botón "Explorar" va al mapa */}
           <div className="flex items-center bg-white/90 border-2 border-[#1A1A1A] p-1 max-w-xl shadow-[4px_4px_0px_rgba(26,26,26,1)]">
             <Search className="w-5 h-5 text-[#1A1A1A] ml-3" />
             <input 
@@ -91,7 +88,7 @@ function Landing() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
-          {/* Tarjeta 1 */}
+          {/* TARJETA 1: "Atlas del conflicto" va al mapa */}
           <a href="/mapa" className="group flex flex-col border-t-4 border-[#1A1A1A] pt-4 cursor-pointer">
             <div className="h-48 overflow-hidden relative mb-4 border border-gray-300">
               <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop" alt="Mapa" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
@@ -109,7 +106,7 @@ function Landing() {
             </span>
           </a>
 
-          {/* Tarjeta 2 */}
+          {/* TARJETA 2: Por ahora no va a ningún lado, cambia el href="#" cuando tengas la página */}
           <a href="#" className="group flex flex-col border-t-4 border-[#1A1A1A] pt-4 cursor-pointer">
             <div className="h-48 overflow-hidden relative mb-4 border border-gray-300">
               <img src="https://images.unsplash.com/photo-1555848962-6e79363ec58f?q=80&w=1000&auto=format&fit=crop" alt="Politica" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
@@ -127,7 +124,7 @@ function Landing() {
             </span>
           </a>
 
-          {/* Tarjeta 3 */}
+          {/* TARJETA 3: Por ahora no va a ningún lado */}
           <a href="#" className="group flex flex-col border-t-4 border-[#1A1A1A] pt-4 cursor-pointer">
             <div className="h-48 overflow-hidden relative mb-4 border border-gray-300">
               <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1000&auto=format&fit=crop" alt="Sociedad" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
@@ -145,7 +142,7 @@ function Landing() {
             </span>
           </a>
 
-          {/* Tarjeta 4 */}
+          {/* TARJETA 4: Por ahora no va a ningún lado */}
           <a href="#" className="group flex flex-col border-t-4 border-[#1A1A1A] pt-4 cursor-pointer">
             <div className="h-48 overflow-hidden relative mb-4 border border-gray-300">
               <img src="https://images.unsplash.com/photo-1588666309990-d68f08e3d4a6?q=80&w=1000&auto=format&fit=crop" alt="Archivo" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
