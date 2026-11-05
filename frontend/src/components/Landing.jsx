@@ -2,28 +2,24 @@ import React from 'react';
 import { Search, Map, Landmark, Users, FileText, ArrowRight } from 'lucide-react';
 
 function Landing() {
-  // AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
-  // Solo reemplaza el enlace de abajo por la URL de tu imagen o por una ruta local como "/mi-imagen.jpg"
-  const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
+  // 🖼️ AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
+  // Puedes usar una URL de internet o una ruta local (ej: "/mi-foto.jpg")
+  const heroImage = "https://images.unsplash.com/photo-1544985361-b4a60f224146?q=80&w=2070&auto=format&fit=crop";
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 font-sans selection:bg-amber-900 selection:text-white">
       
       {/* --- NAVBAR --- */}
       <nav className="absolute top-0 w-full z-50 flex items-center justify-between px-8 py-6 text-sm">
-        <div className="flex items-center space-x-3">
-          {/* LOGO EN PNG (Asegúrate de que esté en frontend/public/logo.png) */}
+        
+        {/* LOGO GRANDE (Sin letras) */}
+        <a href="/" className="flex items-center">
           <img 
             src="/logo.png" 
-            alt="Logo Atlas de la Memoria" 
-            className="w-10 h-10 object-contain" 
+            alt="Atlas de la Memoria" 
+            className="h-16 md:h-20 w-auto object-contain" 
           />
-          
-          <div className="leading-tight">
-            <h1 className="text-white font-bold tracking-widest text-lg">ATLAS</h1>
-            <p className="text-amber-500 tracking-widest text-xs">DE LA MEMORIA</p>
-          </div>
-        </div>
+        </a>
         
         <div className="hidden md:flex space-x-8 text-zinc-300">
           <a href="#" className="text-white border-b-2 border-amber-500 pb-1">Inicio</a>
