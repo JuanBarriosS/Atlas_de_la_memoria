@@ -46,7 +46,9 @@ class SucesoDetalleResponse(BaseModel):
     descripcion: str
     video_url: Optional[str] = None
     fuentes: list
-    actores: List[ActorResponse] = []  # <-- NUEVO
+    tipo_representacion: str          
+    precision_geografica: Optional[str] = None  
+    actores: List[ActorResponse] = []
 
     class Config:
         from_attributes = True
