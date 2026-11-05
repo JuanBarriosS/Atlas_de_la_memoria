@@ -14,39 +14,30 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-// Íconos por tipo de representación (colores de leaflet-color-markers)
 const iconosPorTipo = {
-  pin: new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+  pin: new L.DivIcon({
+    className: 'custom-div-icon',
+    html: `<div style="background-color: #1A1A1A; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #F4F1EA; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
   }),
-  proceso: new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+  proceso: new L.DivIcon({
+    className: 'custom-div-icon',
+    html: `<div style="background-color: #9333EA; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #F4F1EA; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`, // Violeta
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
   }),
-  ruta: new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+  ruta: new L.DivIcon({
+    className: 'custom-div-icon',
+    html: `<div style="background-color: #16A34A; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #F4F1EA; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`, // Verde
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
   }),
-  capa: new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
+  capa: new L.DivIcon({
+    className: 'custom-div-icon',
+    html: `<div style="background-color: #EA580C; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #F4F1EA; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`, // Naranja
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
   }),
 };
 
