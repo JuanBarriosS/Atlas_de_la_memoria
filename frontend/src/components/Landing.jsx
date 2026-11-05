@@ -2,8 +2,6 @@ import React from 'react';
 import { Search, Map, Landmark, Users, FileText, ArrowRight } from 'lucide-react';
 
 function Landing() {
-  // 🖼️ AQUÍ PUEDES CAMBIAR LA IMAGEN DE FONDO DEL HERO
-  // Intenta usar una foto en blanco y negro o sepia para que combine con el periódico
   const heroImage = "https://static.eldiario.es/clip/6adab925-cf7f-4c3c-b295-b8beb5f01b3a_source-aspect-ratio_default_0.webp";
 
   return (
