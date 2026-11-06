@@ -1,8 +1,8 @@
 import React from 'react';
-import { Shield, Clock, BookOpen, Film, AlertTriangle, Users, ArrowLeft } from 'lucide-react';
+import { Shield, Clock, BookOpen, Film, AlertTriangle, Users, ArrowLeft, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-function PanelLateral({ sucesoSeleccionado, error }) {
+function PanelLateral({ sucesoSeleccionado, error, onCerrar }) {
   const tipoLabels = {
     pin: { texto: 'Hecho individual', color: 'bg-blue-100 text-blue-800 border-blue-800' },
     proceso: { texto: 'Proceso histórico', color: 'bg-purple-100 text-purple-800 border-purple-800' },
@@ -11,22 +11,31 @@ function PanelLateral({ sucesoSeleccionado, error }) {
   };
 
   return (
-    <div className="w-1/3 h-screen bg-[#F4F1EA] border-r-2 border-[#1A1A1A] flex flex-col z-20 shadow-2xl overflow-y-auto font-serif">
+    <div className="h-full bg-[#F4F1EA] flex flex-col overflow-y-auto font-serif">
       
       {/* CABECERA DEL PANEL */}
-      <div className="p-6 border-b-2 border-[#1A1A1A] bg-[#F4F1EA] sticky top-0 z-10">
-        <Link to="/" className="text-xs uppercase tracking-widest font-bold flex items-center space-x-1 text-gray-600 hover:text-black mb-4">
-          <ArrowLeft className="w-3 h-3" />
-          <span>Volver al inicio</span>
-        </Link>
-        <div className="flex items-center space-x-2 text-[#1A1A1A] mb-1">
-          <Shield className="w-5 h-5 text-amber-700" />
-          <h1 className="text-xl font-bold tracking-tighter uppercase">Cartografía de la Memoria</h1>
+      <div className="p-4 md:p-6 border-b-2 border-[#1A1A1A] bg-[#F4F1EA] sticky top-0 z-10 flex justify-between items-start">
+        <div>
+          <Link to="/" className="text-xs uppercase tracking-widest font-bold flex items-center space-x-1 text-gray-600 hover:text-black mb-2">
+            <ArrowLeft className="w-3 h-3" />
+            <span>Volver al inicio</span>
+          </Link>
+          <div className="flex items-center space-x-2 text-[#1A1A1A] mb-1">
+            <Shield className="w-5 h-5 text-amber-700" />
+            <h1 className="text-lg md:text-xl font-bold tracking-tighter uppercase">Cartografía de la Memoria</h1>
+          </div>
         </div>
-        <p className="text-xs text-gray-500 uppercase tracking-widest font-sans">Conflicto Armado en Colombia</p>
+
+        {/* Botón de cerrar solo para móvil */}
+        <button 
+          onClick={onCerrar}
+          className="md:hidden p-2 text-gray-500 hover:text-black"
+        >
+          <X className="w-6 h-6" />
+        </button>
       </div>
 
-      <div className="flex-1 p-6 space-y-6">
+      <div className="flex-1 p-4 md:p-6 space-y-6 pb-20">
         {error && (
           <div className="p-4 bg-red-100 border border-red-800 rounded-none text-red-800 text-xs flex items-center space-x-2 font-sans">
             <AlertTriangle className="w-4 h-4 flex-shrink-0" />
@@ -42,7 +51,7 @@ function PanelLateral({ sucesoSeleccionado, error }) {
         ) : (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-[#1A1A1A] border-b border-[#1A1A1A] pb-2 leading-tight tracking-tighter mb-3">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1A1A1A] border-b border-[#1A1A1A] pb-2 leading-tight tracking-tighter mb-3">
                 {sucesoSeleccionado.titulo}
               </h2>
               
@@ -54,7 +63,7 @@ function PanelLateral({ sucesoSeleccionado, error }) {
                 )}
               </div>
 
-              <div className="flex items-center space-x-4 text-xs text-[#333] bg-[#E8E4D9] p-2 border border-gray-300 font-sans">
+              <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4 text-xs text-[#333] bg-[#E8E4D9] p-2 border border-gray-300 font-sans">
                 <div className="flex items-center space-x-1">
                   <Clock className="w-3.5 h-3.5 text-amber-700" />
                   <span>{sucesoSeleccionado.fecha}</span>
@@ -90,7 +99,7 @@ function PanelLateral({ sucesoSeleccionado, error }) {
               <h3 className="text-xs uppercase tracking-widest text-[#1A1A1A] font-bold flex items-center space-x-1 font-sans border-b border-[#1A1A1A] pb-1">
                 <span>📄 Relato de los hechos</span>
               </h3>
-              <p className="text-sm text-[#222] leading-relaxed bg-transparent p-1 max-h-60 overflow-y-auto font-sans">
+              <p className="text-sm text-[#222] leading-relaxed bg-transparent p-1 font-sans">
                 {sucesoSeleccionado.descripcion}
               </p>
             </div>
