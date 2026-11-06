@@ -1,55 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Mapa from './components/Mapa';
 import PanelLateral from './components/PanelLateral';
 import { useSucesos } from './hooks/useSucesos';
 import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 
 function App() {
   const { pines, sucesoSeleccionado, error, seleccionarPin } = useSucesos();
+  const [mostrarPanelMovil, setMostrarPanelMovil] = useState(false);
+
+  // Cuando se selecciona un pin, abrimos el panel automáticamente en móvil
+  const handleSeleccionarPin = (id) => {
+    seleccionarPin(id);
+    setMostrarPanelMovil(true);
+  };
 
   return (
     <div className="flex flex-col h-screen w-screen bg-[#F4F1EA] text-[#1A1A1A] overflow-hidden font-serif">
       
-      {/* NAVBAR IDÉNTICA A LA LANDING */}
-      <nav className="fixed top-0 w-full z-50 flex items-center justify-between px-8 py-4 bg-[#F4F1EA]/95 backdrop-blur-sm border-b-2 border-[#1A1A1A] shrink-0">
-        
-        {/* LOGO */}
+      {/* NAVBAR (Responsive) */}
+      <nav className="h-16 bg-[#F4F1EA] border-b-2 border-[#1A1A1A] flex items-center justify-between px-4 md:px-6 z-50 shrink-0">
         <Link to="/" className="flex items-center">
-          <img 
-            src="/logo.png" 
-            alt="Atlas de la Memoria" 
-            className="h-12 md:h-14 w-auto object-contain grayscale mix-blend-multiply" 
-          />
+          <img src="/logo.svg" alt="Atlas" className="h-8 md:h-10 w-auto object-contain grayscale mix-blend-multiply" />
         </Link>
         
-        {/* ENLACES */}
-        <div className="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-bold text-[#1A1A1A]">
-          <Link to="/" className="hover:text-amber-700 transition-colors">Inicio</Link>
+        <div className="hidden md:flex space-x-6 text-xs uppercase tracking-widest font-bold text-[#1A1A1A]">
+          <Link to="/" className="hover:text-amber-700">Inicio</Link>
           <Link to="/mapa" className="border-b-2 border-amber-600 pb-1">Atlas</Link>
-          <Link to="#" className="hover:text-amber-700 transition-colors">Cronología</Link>
-          <Link to="#" className="hover:text-amber-700 transition-colors">Documentos</Link>
-          <Link to="#" className="hover:text-amber-700 transition-colors">Sobre el proyecto</Link>
+          <Link to="/admin" className="hover:text-amber-700">Admin</Link>
         </div>
 
-        {/* SOLO EL BUSCADOR (Sin el botón negro) */}
-        <div className="flex items-center">
-          <Search className="w-5 h-5 text-[#1A1A1A] cursor-pointer hover:text-amber-700 transition-colors" />
+        <div className="flex items-center space-x-4">
+           <Search className="w-5 h-5 text-[#1A1A1A]" />
+           {/* Botón para abrir el panel en móvil */}
+           <button 
+             className="md:hidden text-[#1A1A1A]"
+             onClick={() => setMostrarPanelMovil(!mostrarPanelMovil)}
+           >
+             {mostrarPanelMovil ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+           </button>
         </div>
       </nav>
 
-      {/* CONTENEDOR DEL MAPA Y PANEL */}
-      {/* El pt-20 compensa la altura de la navbar fija */}
-      <div className="flex flex-1 overflow-hidden pt-[88px]"> 
-        <PanelLateral 
-          sucesoSeleccionado={sucesoSeleccionado} 
-          error={error} 
-        />
+      {/* CONTENEDOR PRINCIPAL */}
+      <div className="flex flex-1 overflow-hidden relative">
+        
+        {/* PANEL LATERAL: 
+            En escritorio es un w-1/3 estático. 
+            En móvil es una capa absoluta que sube desde abajo (bottom sheet) */}
+        <div className={`
+          absolute md:relative z-40 bg-[#F4F1EA] h-full
+          transition-transform duration-300 ease-in-out
+          w-full md:w-1/3 border-r-2 border-[#1A1A1A]
+          ${mostrarPanelMovil ? 'translate-y-0' : 'translate-y-full md:translate-y-0'}
+        `}>
+          <PanelLateral 
+            sucesoSeleccionado={sucesoSeleccionado} 
+            error={error} 
+            onCerrar={() => setMostrarPanelMovil(false)}
+          />
+        </div>
 
-        <Mapa 
-          pines={pines} 
-          onSeleccionarPin={seleccionarPin} 
-        />
+        {/* MAPA: Ocupa todo el espacio restante */}
+        <div className="flex-1 h-full w-full relative z-0">
+          <Mapa 
+            pines={pines} 
+            onSeleccionarPin={handleSeleccionarPin} 
+          />
+        </div>
+
       </div>
 
     </div>
